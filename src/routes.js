@@ -39,6 +39,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const EditUser = React.lazy(() => import('./views/users/editUser'));
 const AddUsers = React.lazy(() => import('./views/users/addUser'));
 const News = React.lazy(() => import('./views/news/news'));
 const Blogs = React.lazy(() => import('./views/blogs/blogs'));
@@ -49,7 +50,8 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/users/add-users', name: 'Add User', component: AddUsers },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/user/:id', exact: true, name: 'User Details', component: User },
+  { path: '/user/edit/:id', exact: true, name: 'Edit User', component: EditUser },
   { path: '/news', exact: true, name: 'news', component: News },
   { path: '/blogs', exact: true, name: 'blogs', component: Blogs }
 //  { path: '/users', name: 'users', component: Cards, exact: true },

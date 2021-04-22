@@ -12,28 +12,23 @@ const _nav =  [
       text: 'NEW',
     }
   },
+  // {
+  //   _tag: 'CSidebarNavTitle',
+  //   _children: ['Components']
+  // },
   {
-    _tag: 'CSidebarNavTitle',
-    _children: ['Components']
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Users',
-    route: '/users',
+    _tag: 'CSidebarNavItem',
+    name: 'users',
+    to: '/users',
     icon: 'cil-puzzle',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'All-Users',
-        to: '/users',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Add-Users',
-        to: '/users/add-users',
-      }
-      
-    ]
+    // _children: [
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'All-Users',
+    //     to: '/users',
+    //   },
+           
+    // ]
   },
   {
     _tag: 'CSidebarNavItem',
@@ -49,6 +44,19 @@ const _nav =  [
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
   
   },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Pages',
+    route: '/pages',
+    icon: 'cil-star',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Login',
+        to: '/login',
+      },
+    ]
+  }
 ]
 
 export default _nav

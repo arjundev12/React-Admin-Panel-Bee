@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useHistory, Redirect } from 'react-router-dom'
 import { withRouter } from "react-router";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import navigation from '../../../containers/_nav'
 import {
   CButton,
@@ -31,8 +33,10 @@ const Login = (props) => {
     const res = await axios.post(`http://3.12.65.48:3001/api/admin/login`, newEntry);
     console.warn(res.data)
     if (res.data.code == 200) {
-      let to = '/dashboard'
-      history.push(to);
+      toast("Get successfully");
+      // let to = '/dashboard'
+      setTimeout(function(){history.push('/dashboard'); }, 2000);
+      
       //  <Redirect to='/dashboard' />;
 
       // if (res.data.code == 200) {
@@ -96,6 +100,7 @@ const Login = (props) => {
           </CCol>
         </CRow>
       </CContainer>
+   <ToastContainer/>
     </div>
   )
 }
