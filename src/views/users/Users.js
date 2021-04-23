@@ -43,7 +43,7 @@ const Users = () => {
     }, []);
     const loadUser = async () => {
         let array = []
-        const res = await axios.post(`http://3.12.65.48:3001/api/admin/get-user`);
+        const res = await axios.post(`/api/admin/get-user`);
         console.warn(res.data.data)
         for (let item of res.data.data.docs) {
             if (item.name) {
