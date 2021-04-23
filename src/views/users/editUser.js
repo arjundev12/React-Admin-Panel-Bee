@@ -43,7 +43,7 @@ const EditUser = () => {
         data._id = user._id
         data.login_type = 'manual'
         console.log("daaaaaaa", data)
-        let response = await axios.post(`http://3.12.65.48:3001/api/user/update-profile`, data);
+        let response = await axios.post(`/api/user/update-profile`, data);
         if (response.data.code == 200) {
             toast("Update successfully");
             setTimeout(function(){history.push("/users"); }, 3000);
@@ -54,7 +54,7 @@ const EditUser = () => {
     const loadUser = async () => {
 
         // const result = 
-        await axios.get(`http://3.12.65.48:3001/api/user/user-details?_id=${id}`).then((res) => {
+        await axios.get(`/api/user/user-details?_id=${id}`).then((res) => {
             console.log("response", res.data)
             setUser(res.data.data);
         }).catch(err => {

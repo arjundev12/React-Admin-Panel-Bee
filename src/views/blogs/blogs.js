@@ -20,7 +20,7 @@ useEffect(() => {
 }, []);
 const loadUser = async () => {
     let array = []
-    const res = await axios.post(`http://3.12.65.48:3001/api/admin/get-blogs`);
+    const res = await axios.post(`/api/admin/get-blogs`);
     console.warn(res.data.data)
     for (let item of res.data.data.docs) {
         if (item.title) {

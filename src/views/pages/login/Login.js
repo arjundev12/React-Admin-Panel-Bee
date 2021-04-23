@@ -30,7 +30,7 @@ const Login = (props) => {
     e.preventDefault()
     const newEntry = { email: email, password: password }
     setAllEntry([...allEntry, newEntry])
-    const res = await axios.post(`http://3.12.65.48:3001/api/admin/login`, newEntry);
+    const res = await axios.post(`/api/admin/login`, newEntry);
     console.warn(res.data)
     if (res.data.code == 200) {
       toast("Get successfully");

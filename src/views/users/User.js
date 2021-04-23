@@ -22,7 +22,7 @@ const User = ({ match }) => {
     getdata(match.params.id)
   }, []);
   const getdata = async (id) => {
-    const res = await axios.get(`http://3.12.65.48:3001/api/user/user-details?_id=${id}`);
+    const res = await axios.get(`/api/user/user-details?_id=${id}`);
     console.warn("response", res.data)
     if (res.data.code != 200) {
       toast("Somethig went wrong");
