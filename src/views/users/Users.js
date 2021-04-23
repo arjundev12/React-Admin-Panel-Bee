@@ -55,7 +55,7 @@ const Users = () => {
     };
     const detailsView = async (item) => {
         console.warn("inside handle click", item)
-        // history.push(`/user/${item._id}`)
+        // history.push(`/user/${item._id}  `)
     }
 
     return (
