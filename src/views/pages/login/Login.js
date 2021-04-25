@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import navigation from '../../../containers/_nav'
+import *as  CONSTANT  from '../../../constant'
 import {
   CButton,
   CCard,
@@ -30,7 +31,7 @@ const Login = (props) => {
     e.preventDefault()
     const newEntry = { email: email, password: password }
     setAllEntry([...allEntry, newEntry])
-    const res = await axios.post(`/api/admin/login`, newEntry);
+    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/login`, newEntry);
     console.warn(res.data)
     if (res.data.code == 200) {
       toast("Get successfully");

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import *as  CONSTANT  from '../../constant'
 const EditUser = () => {
     let history = useHistory();
     const { id } = useParams();
@@ -43,7 +43,7 @@ const EditUser = () => {
         data._id = user._id
         data.login_type = 'manual'
         console.log("daaaaaaa", data)
-        let response = await axios.post(`/api/user/update-profile`, data);
+        let response = await axios.post(`${CONSTANT.baseUrl}/api/user/update-profile`, data);
         if (response.data.code == 200) {
             toast("Update successfully");
             setTimeout(function(){history.push("/users"); }, 3000);
@@ -54,7 +54,7 @@ const EditUser = () => {
     const loadUser = async () => {
 
         // const result = 
-        await axios.get(`/api/user/user-details?_id=${id}`).then((res) => {
+        await axios.get(`${CONSTANT.baseUrl}/api/user/user-details?_id=${id}`).then((res) => {
             console.log("response", res.data)
             setUser(res.data.data);
         }).catch(err => {

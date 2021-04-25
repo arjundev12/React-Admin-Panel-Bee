@@ -6,7 +6,7 @@ import { useHistory, useLocation, Link, useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import usersData from './UsersData'
-
+import *as  CONSTANT  from '../../constant'
 const User = ({ match }) => {
   // const user = usersData.find( user => user.id.toString() === match.params.id)
   const [user, setUser] = useState({
@@ -22,7 +22,8 @@ const User = ({ match }) => {
     getdata(match.params.id)
   }, []);
   const getdata = async (id) => {
-    const res = await axios.get(`/api/user/user-details?_id=${id}`);
+    console.log("process.env.NODE_ENV", process.env.NODE_ENV)
+    const res = await axios.get(`${CONSTANT.baseUrl}/api/user/user-details?_id=${id}`);
     console.warn("response", res.data)
     if (res.data.code != 200) {
       toast("Somethig went wrong");

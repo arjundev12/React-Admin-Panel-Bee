@@ -4,6 +4,7 @@ import axios from "axios";
 import { Button, Table } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import *as  CONSTANT  from '../../constant'
 import {
     CBadge,
     CCard,
@@ -17,6 +18,7 @@ import {
 
 import usersData from './UsersData'
 import { number } from 'prop-types'
+// import { from } from 'core-js/core/array';
 
 const getBadge = status => {
     switch (status) {
@@ -43,7 +45,7 @@ const Users = () => {
     }, []);
     const loadUser = async () => {
         let array = []
-        const res = await axios.post(`/api/admin/get-user`);
+        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-user`);
         console.warn(res.data.data)
         for (let item of res.data.data.docs) {
             if (item.name) {

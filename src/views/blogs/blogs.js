@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation, Link, useParams } from 'react-router-dom'
 import axios from "axios";
 import { Button, Table } from 'react-bootstrap'
-
+import *as  CONSTANT  from '../../constant'
 
 
 const Blogs = () => {
@@ -20,7 +20,7 @@ useEffect(() => {
 }, []);
 const loadUser = async () => {
     let array = []
-    const res = await axios.post(`/api/admin/get-blogs`);
+    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-blogs`);
     console.warn(res.data.data)
     for (let item of res.data.data.docs) {
         if (item.title) {
