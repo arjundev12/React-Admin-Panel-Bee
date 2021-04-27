@@ -35,6 +35,9 @@ const loadUser = async () => {
         <Link className="btn btn-primary" to="/">
             back to Home
        </Link>
+       <Link className="btn btn-primary" to="/add/blogs">
+            add Blogs
+       </Link>
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -47,7 +50,7 @@ const loadUser = async () => {
             <tbody>
                 {
                     user.map((item, i) => <tr>
-                        <td>{i}</td>
+                        <td>{i+1}</td>
                         <td>{item.title}</td>
                         <td>{item.content}</td>
                         <td>{item.created_by+""}</td>

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import *as  CONSTANT from '../../constant'
 import { ToastContainer, toast } from 'react-toastify';
-const Addblog = () => {
+const AddNews = () => {
   let history = useHistory();
   const [blog, setBlog] = useState({
     title: "",
@@ -23,6 +23,7 @@ const Addblog = () => {
     const data = new FormData()
     data.append('image', image.image)
     const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, data);
+
     if (res.data.code == 200) {
       toast(res.data.message);
       console.warn(res.data.data.path)
@@ -34,15 +35,15 @@ const Addblog = () => {
   const onSubmit = async e => {
     e.preventDefault();
     console.warn("onsumbit", blog)
-    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/blogs`, blog);
+    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/news`, blog);
     toast(res.data.message);
-    setTimeout(function(){history.push("/blogs"); }, 1000);
+    setTimeout(function(){history.push("/news"); }, 1000);
     
   };
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-5">
-        <h2 className="text-center mb-4">Add A Blog</h2>
+        <h2 className="text-center mb-4">Add A News</h2>
         <form onSubmit={e => onSubmit(e)}>
           <div className="form-group">
             <input
@@ -77,4 +78,4 @@ const Addblog = () => {
   );
 };
 
-export default Addblog;
+export default AddNews;

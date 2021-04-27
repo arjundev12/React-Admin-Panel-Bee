@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation, Link, useParams } from 'react-router-dom'
 import axios from "axios";
 import { Button, Table } from 'react-bootstrap'
-import *as  CONSTANT  from '../../constant'
+import *as  CONSTANT from '../../constant'
 
 
 const News = () => {
@@ -35,6 +35,9 @@ const News = () => {
             <Link className="btn btn-primary" to="/">
                 back to Home
        </Link>
+            <Link className="btn btn-primary" to="/add/news">
+                add News
+       </Link>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -47,7 +50,7 @@ const News = () => {
                 <tbody>
                     {
                         user.map((item, i) => <tr>
-                            <td>{i}</td>
+                            <td>{i+1}</td>
                             <td>{item.title}</td>
                             <td>{item.content}</td>
                             <td>{item.created_by + ""}</td>
