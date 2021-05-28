@@ -5,37 +5,45 @@ import *as  CONSTANT from '../../constant'
 import { ToastContainer, toast } from 'react-toastify';
 const AddNews = () => {
   let history = useHistory();
-  const [blog, setBlog] = useState({
+  const [news, setNews] = useState({
     title: "",
     content: "",
     image: ""
   });
   const [image, setImage] = useState({});
 
-  const { title, content } = blog;
+  const { title, content } = news;
   const onInputChange = e => {
-    setBlog({ ...blog, [e.target.name]: e.target.value });
+    setNews({ ...news, [e.target.name]: e.target.value });
   };
   const onInputChange1 = async e => {
-    setImage({ image: e.target.files[0] });
+    console.log("onimputchenge",  e.target.files[0] )
+
+    let reader = await new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = function () {
+      console.warn("................",reader.result)
+      setImage({image:reader.result })
+      return
+  };
+    // setImage({ image: e.target.files[0] });
   };
   const uploadImage = async e => {
-    const data = new FormData()
-    data.append('image', image.image)
-    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, data);
-
+    console.log("image", image)
+    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, image);
+    console.log("res", res)
     if (res.data.code == 200) {
       toast(res.data.message);
-      console.warn(res.data.data.path)
-      await setBlog({ ...blog, image: res.data.data.path });
+      console.warn(res.data.data.data)
+      await setNews({ ...news, image: res.data.data });
 
     }
   };
 
   const onSubmit = async e => {
     e.preventDefault();
-    console.warn("onsumbit", blog)
-    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/news`, blog);
+    console.warn("onsumbit", news)
+    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/news`, news);
     toast(res.data.message);
     setTimeout(function(){history.push("/news"); }, 1000);
     

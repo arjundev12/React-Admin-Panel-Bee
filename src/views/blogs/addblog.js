@@ -17,16 +17,23 @@ const Addblog = () => {
     setBlog({ ...blog, [e.target.name]: e.target.value });
   };
   const onInputChange1 = async e => {
-    setImage({ image: e.target.files[0] });
+    // setImage({ image: e.target.files[0] });
+    
+    let reader = await new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = function () {
+      console.warn("................",reader.result)
+      setImage({image:reader.result })
+      return
+  };
   };
   const uploadImage = async e => {
-    const data = new FormData()
-    data.append('image', image.image)
-    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, data);
+
+    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, image);
     if (res.data.code == 200) {
       toast(res.data.message);
-      console.warn(res.data.data.path)
-      await setBlog({ ...blog, image: res.data.data.path });
+      console.warn(res.data.data)
+      await setBlog({ ...blog, image: res.data.data });
 
     }
   };

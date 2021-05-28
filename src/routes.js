@@ -46,11 +46,11 @@ const Blogs = React.lazy(() => import('./views/blogs/blogs'));
 const AddBlogs = React.lazy(() => import('./views/blogs/addblog'));
 const Login = React.lazy(() => import('./views/pages/login/Login'));
 const AddNews = React.lazy(() => import('./views/news/addNews'));
+const Transactions = React.lazy(() => import('./views/Transactions/transactions'));
 
 
 const routes = [
-  // { path: '/', exact: true, name: 'Home' },
-  { path: '/', exact: true, name: 'login', component :Login },
+  { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/users/add-users', name: 'Add User', component: AddUsers },
   { path: '/users', exact: true,  name: 'Users', component: Users },
@@ -59,9 +59,9 @@ const routes = [
   { path: '/news', exact: true, name: 'news', component: News },
   { path: '/blogs', exact: true, name: 'blogs', component: Blogs },
   { path: '/add/blogs', exact: true, name: 'AddBlogs', component: AddBlogs },
-  { path: '/add/news', exact: true, name: 'AddNews', component: AddNews }
+  { path: '/add/news', exact: true, name: 'AddNews', component: AddNews },
  
-//  { path: '/users', name: 'users', component: Cards, exact: true },
+ { path: '/transactions', name: 'transactions', component: Transactions, exact: true },
   // { path: '/theme', name: 'Theme', component: Colors, exact: true },
   // { path: '/theme/colors', name: 'Colors', component: Colors },
   // { path: '/theme/typography', name: 'Typography', component: Typography },

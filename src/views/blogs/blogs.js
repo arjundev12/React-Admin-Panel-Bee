@@ -3,7 +3,8 @@ import { useHistory, useLocation, Link, useParams } from 'react-router-dom'
 import axios from "axios";
 import { Button, Table } from 'react-bootstrap'
 import *as  CONSTANT  from '../../constant'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Blogs = () => {
   const history = useHistory()
@@ -29,7 +30,23 @@ const loadUser = async () => {
     }
     setUser(array);
 };
-
+const onInputChange = async (e, item) => {
+    console.warn("oninput change data ", e.target.value, item)
+    let data = {}
+    data.status = e.target.value
+    data.id = item._id
+    // data.login_type = item.login_type
+    console.log("request", data)
+    await axios.put(`${CONSTANT.baseUrl}/api/admin/blogs`, data).then((data1) =>{
+        console.log("response", data1)
+        // toast( data1.data.data.message)
+        loadUser()
+    }).catch((err) =>{
+        console.log("error", err)
+        toast(err.data.message)
+    })
+  
+};
   return (
     <div>
         <Link className="btn btn-primary" to="/">
@@ -44,7 +61,8 @@ const loadUser = async () => {
                     <th>S.no</th>
                     <th>Title</th>
                     <th>Content</th>
-                    <th>Created by</th>
+                    <th class="address">status</th>
+                    {/* <th>Created by</th> */}
                 </tr>
             </thead>
             <tbody>
@@ -53,11 +71,19 @@ const loadUser = async () => {
                         <td>{i+1}</td>
                         <td>{item.title}</td>
                         <td>{item.content}</td>
-                        <td>{item.created_by+""}</td>
+                        <td>
+                                <select class="form-control" name="status" value={item.status?item.status:'active'}
+                                    onChange={e => onInputChange(e, item)}>
+                                    <option value= {'active'} >Active</option>
+                                    <option value={'inactive'}>Inactive</option>
+                                    {/* <option value="blocked">Block</option> */}
+                                </select></td>
+                        {/* <td>{item.created_by+""}</td> */}
                     </tr>)
                 }
             </tbody>
         </Table>
+        <ToastContainer/>
         {/* <Button variant="primary">Primary</Button> */}
     </div>
 )

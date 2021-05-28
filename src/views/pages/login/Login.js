@@ -35,13 +35,9 @@ const Login = (props) => {
     console.warn(res.data)
     if (res.data.code == 200) {
       toast("Get successfully");
-      // let to = '/dashboard'
-      setTimeout(function(){history.push('/dashboard'); }, 2000);
+      localStorage.setItem('Auth', true);
+      setTimeout(function(){history.push('/'); }, 1000);
       
-      //  <Redirect to='/dashboard' />;
-
-      // if (res.data.code == 200) {
-      // }
     }
     console.warn(allEntry)
   }

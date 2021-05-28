@@ -8,8 +8,16 @@ import {
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import image from '../../src/assets/download.png'
+import { useHistory, useParams } from "react-router-dom";
+import { Button } from 'react-bootstrap'
 const TheHeaderDropdown = () => {
+  let history = useHistory();
+  const clearLocalstorage = async e =>{
+    console.log("hiiiii")
+    localStorage.clear();
+    history.push("/");
+  }
   return (
     <CDropdown
       inNav
@@ -19,7 +27,7 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={image}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
           />
@@ -34,7 +42,7 @@ const TheHeaderDropdown = () => {
         >
           <strong>Account</strong>
         </CDropdownItem>
-        <CDropdownItem>
+        {/* <CDropdownItem>
           <CIcon name="cil-bell" className="mfe-2" />
           Updates
           <CBadge color="info" className="mfs-auto">42</CBadge>
@@ -79,10 +87,10 @@ const TheHeaderDropdown = () => {
           Projects
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
-        <CDropdownItem divider />
+        <CDropdownItem divider /> */}
         <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+        <Button  onClick ={e => clearLocalstorage(e)}>log out</Button>
+         {/* LOGOUT */}
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
