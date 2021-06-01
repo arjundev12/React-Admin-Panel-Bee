@@ -70,7 +70,6 @@ const News = () => {
                 add News
        </Link>
        <div>
-                <form>
                     <input
                         type="text"
                         className="searchBox"
@@ -79,7 +78,6 @@ const News = () => {
                         value={search.text}
                         onChange={e => onInputChange1(e)}
                     />
-                </form>
             </div>
             <Table striped bordered hover>
                 <thead>

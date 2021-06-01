@@ -94,7 +94,6 @@ const Transactions = () => {
                 <Dropdown.Item eventKey="option-2">Old transaction</Dropdown.Item>
             </DropdownButton>
             <div>
-                <form>
                     <input
                         type="text"
                         className="searchBox"
@@ -103,7 +102,6 @@ const Transactions = () => {
                         value={search.text}
                         onChange={e => onInputChange1(e)}
                     />
-                </form>
             </div>
 
             <Table striped bordered hover>

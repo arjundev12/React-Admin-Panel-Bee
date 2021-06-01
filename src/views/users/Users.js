@@ -85,7 +85,6 @@ const Users = () => {
                 back to Home
        </Link>
             <div className= "searchBox">
-                <form>
                     <input
                         type="text"
                         className="searchBox"
@@ -94,7 +93,6 @@ const Users = () => {
                         value={search.text}
                         onChange={e => onInputChange1(e)}
                     />
-                </form>
             </div>
 
             <Table striped bordered hover>
