@@ -19,6 +19,7 @@ const Transactions = () => {
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [index, setIndex] = useState(1);
+    const [filters, setFilters] = useState({})
 
     const onPaginationChange = (start, end) => {
         console.warn("getee, ", start, end)
@@ -26,17 +27,25 @@ const Transactions = () => {
         setIndex(end)
     };
     const [transactions, setTransactions] = useState([]);
+    const [search, setSearch] = useState({});
     const { id } = useParams();
     useEffect(() => {
-        loadData(page);
+        loadData(page, filters);
 
-    }, [page, total]);
-    const loadData = async (page) => {
-        let array = []
+    }, [page, total, filters ,search]);
+    const loadData = async (page, filters = null) => {
         const data = {
             page: page,
             limit: 5
         }
+
+        if (!(Object.keys(filters).length === 0 && filters.constructor === Object)) {
+            data.sort = filters
+        }
+        if (!(Object.keys(search).length === 0 && search.constructor === Object)) {
+            data.toId = search.text
+        }   
+        console.log("datadata", data)
         const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-transaction`, data);
         console.warn(res.data.data)
         if (res.data.code == 200) {
@@ -50,34 +59,53 @@ const Transactions = () => {
         console.warn("inside handle click", item)
         // history.push(`/user/${item._id}  `)
     }
-    const onInputChange = async (e, item) => {
-        console.warn("oninput change data ", e.target.value, item)
-        let data = {}
-        data.minner_Activity = e.target.value
-        data._id = item._id
-        data.login_type = item.login_type
-        await axios.post(`${CONSTANT.baseUrl}/api/user/update-profile`, data).then(data1 => {
-            console.log("response", data1)
-            toast(data1.data.data.message)
-            loadData()
-        }).catch(err => {
-            console.log("error", err)
-            toast(err.data.message)
-        })
+    const onInputChange = async (e) => {
+        console.log("targat", e)
+        let filter = {}
+        if (e == 'option-1') {
+            setFilters({ ...filters, createdAt: -1 })
+        }
+        if (e == 'option-2') {
+            setFilters({ ...filters, createdAt: 1 })
+        }
+        // if(e == 'option-3' ){
+        //     setFilters({ ...filters, transaction_type: 1 })
+        // }
+        // if(e == 'option-4' ){
+        //     setFilters({ ...filters, type: 1 })
+        // }
 
     };
-
+    const onInputChange1 = async (e)=>{
+        console.log("search text", e.target.name, e.target.value )
+        setSearch({ ...search, [e.target.name]: e.target.value });
+    }
     return (
         <div>
             <Link className="btn btn-primary" to="/">
                 back to Home
        </Link>
-            <DropdownButton className='fltR' id="dropdown-basic-button" title="Short By">
-                <Dropdown.Item value= {1}>short by date</Dropdown.Item>
-                <Dropdown.Item value= {true}>transaction_type</Dropdown.Item>
-                <Dropdown.Item value= {true}>type</Dropdown.Item>
-                <Dropdown.Item value= {true}>amount</Dropdown.Item>
+            <DropdownButton className='fltR' alignRight
+                title="filter"
+                id="dropdown-menu-align-right"
+
+                onSelect={e => onInputChange(e)}>
+                <Dropdown.Item eventKey="option-1">New transactions</Dropdown.Item>
+                <Dropdown.Item eventKey="option-2">Old transaction</Dropdown.Item>
             </DropdownButton>
+            <div>
+                <form>
+                    <input
+                        type="text"
+                        className="searchBox"
+                        placeholder="search here...."
+                        name="text"
+                        value={search.text}
+                        onChange={e => onInputChange1(e)}
+                    />
+                </form>
+            </div>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>

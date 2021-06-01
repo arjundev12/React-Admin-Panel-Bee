@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation, Link, useParams } from 'react-router-dom'
 import axios from "axios";
-import { Button, Table,DropdownButton,Dropdown } from 'react-bootstrap'
+import { Button, Table, DropdownButton, Dropdown } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import *as  CONSTANT  from '../../constant'
+import *as  CONSTANT from '../../constant'
 import Pagination from '../pagination/pagination'
 
 
@@ -27,63 +27,82 @@ const Users = () => {
     };
     const [user, setUser] = useState([{
         id: "",
+        email:"",
         name: "",
-        username:"",
+        username: "",
         user_type: "",
         minner_Activity: "",
     }]);
     const { id } = useParams();
+    const [search, setSearch] = useState({});
     useEffect(() => {
         loadUser();
 
-    }, [page,total]);
+    }, [page, total, search]);
     const loadUser = async () => {
         let array = []
         const data = {
             page: page,
             limit: 4
         }
-        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-user`,data);
+        if (!(Object.keys(search).length === 0 && search.constructor === Object)) {
+            data.searchData = search.text
+        }
+        console.log("datarequest ", data)
+        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-user`, data);
         console.warn(res.data.data)
         if (res.data.code == 200) {
             toast("List get successfully")
             setUser(res.data.data.docs);
             await setTotal(res.data.data.total)
         }
-       
+
     };
-    const detailsView = async (item) => {
-        console.warn("inside handle click", item)
-        // history.push(`/user/${item._id}  `)
-    }
     const onInputChange = async (e, item) => {
         console.warn("oninput change data ", e.target.value, item)
         let data = {}
         data.minner_Activity = e.target.value
         data._id = item._id
         data.login_type = item.login_type
-        await axios.post(`${CONSTANT.baseUrl}/api/user/update-profile`, data).then(data1 =>{
+        await axios.post(`${CONSTANT.baseUrl}/api/user/update-profile`, data).then(data1 => {
             console.log("response", data1)
-            toast( data1.data.data.message)
+            toast(data1.data.data.message)
             loadUser()
-        }).catch(err=>{
+        }).catch(err => {
             console.log("error", err)
             toast(err.data.message)
         })
-      
+
     };
+    const onInputChange1 = async (e) => {
+        console.log("search text", e.target.name, e.target.value)
+        setSearch({ ...search, [e.target.name]: e.target.value });
+    }
 
     return (
         <div>
             <Link className="btn btn-primary" to="/">
                 back to Home
        </Link>
-      
+            <div className= "searchBox">
+                <form>
+                    <input
+                        type="text"
+                        className="searchBox"
+                        placeholder="search here...."
+                        name="text"
+                        value={search.text}
+                        onChange={e => onInputChange1(e)}
+                    />
+                </form>
+            </div>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>S.no</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Username</th>
                         <th>Type</th>
                         {/* <th>Minner Status</th> */}
@@ -96,22 +115,23 @@ const Users = () => {
                         user.map((item, i) => <tr>
                             <td>{i + index + 1}</td>
                             <td>{item.name}</td>
+                            <td>{item.email}</td>
                             <td>{item.username}</td>
                             <td>{item.user_type}</td>
                             {/* <td>{item.minner_Activity + ""}</td> */}
                             <td>
                                 <select class="form-control" name="minner_Activity" value={item.minner_Activity}
                                     onChange={e => onInputChange(e, item)}>
-                                    <option value= {true} >Active</option>
+                                    <option value={true} >Active</option>
                                     <option value={false}>Inactive</option>
                                     {/* <option value="blocked">Block</option> */}
                                 </select></td>
                             <td><Link className="btn btn-primary mr-2 " to={`/user/${item._id}`}>view </Link>
                                 <Link className="btn btn-primary mr-2" to={`/user/edit/${item._id}`}> edit </Link>
                                 {/* <Link className="btn btn-primary " to="/"> delete</Link> */}
-                                </td>
+                            </td>
                         </tr>)
-                    } 
+                    }
                 </tbody>
             </Table>
             <ToastContainer />

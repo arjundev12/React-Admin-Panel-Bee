@@ -60,6 +60,9 @@ img {
 input[type="text"], input[type="password"], select, textarea, input[type="button"] {
 	max-width: 100%;
 }
+.searchBox{
+	max-width: 20%;
+}
 table {
 	width: 100%;
 }

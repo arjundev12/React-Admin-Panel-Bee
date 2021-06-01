@@ -15,14 +15,24 @@ const News = () => {
         status: "",
         minner_Activity: "",
     }]);
+    
+    const [search, setSearch] = useState({});
     const { id } = useParams();
     useEffect(() => {
         loadUser();
 
-    }, []);
+    }, [search]);
     const loadUser = async () => {
         let array = []
-        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-news`);
+        const data = {
+            page: 1,
+            limit: 5
+        }
+        if (!(Object.keys(search).length === 0 && search.constructor === Object)) {
+            data.searchData = search.text
+        } 
+        console.log("datarequest ", data)
+        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-news`, data);
         console.warn("1111111111",res.data.data)
         for (let item of res.data.data.docs) {
             if (item.title) {
@@ -47,7 +57,10 @@ const News = () => {
         })
       
     };
-
+    const onInputChange1 = async (e)=>{
+        console.log("search text", e.target.name, e.target.value )
+        setSearch({ ...search, [e.target.name]: e.target.value });
+    }
     return (
         <div>
             <Link className="btn btn-primary" to="/">
@@ -56,6 +69,18 @@ const News = () => {
             <Link className="btn btn-primary" to="/add/news">
                 add News
        </Link>
+       <div>
+                <form>
+                    <input
+                        type="text"
+                        className="searchBox"
+                        placeholder="search here...."
+                        name="text"
+                        value={search.text}
+                        onChange={e => onInputChange1(e)}
+                    />
+                </form>
+            </div>
             <Table striped bordered hover>
                 <thead>
                     <tr>
