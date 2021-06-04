@@ -47,6 +47,10 @@ const AddBlogs = React.lazy(() => import('./views/blogs/addblog'));
 const Login = React.lazy(() => import('./views/pages/login/Login'));
 const AddNews = React.lazy(() => import('./views/news/addNews'));
 const Transactions = React.lazy(() => import('./views/Transactions/transactions'));
+//
+const Earning = React.lazy(() => import('./views/Transactions/earning'));
+const Mining = React.lazy(() => import('./views/Transactions/mining'));
+const Refferal = React.lazy(() => import('./views/Transactions/referral'));
 
 
 const routes = [
@@ -62,9 +66,9 @@ const routes = [
   { path: '/add/news', exact: true, name: 'AddNews', component: AddNews },
  
  { path: '/transactions', name: 'transactions', component: Transactions, exact: true },
-  // { path: '/theme', name: 'Theme', component: Colors, exact: true },
-  // { path: '/theme/colors', name: 'Colors', component: Colors },
-  // { path: '/theme/typography', name: 'Typography', component: Typography },
+  { path: '/earning', name: 'Earning', component: Earning, exact: true },
+  { path: '/mining', name: 'Mining', component: Mining , exact: true},
+  { path: '/referral', name: 'Refferal', component: Refferal , exact: true},
   // { path: '/base', name: 'Base', component: Cards, exact: true },
   // { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   // { path: '/base/cards', name: 'Cards', component: Cards },

@@ -45,9 +45,33 @@ const _nav =  [
   
   },
    {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'transactions',
     to: '/transactions',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Earning',
+        to: '/earning',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Mining',
+        to: '/mining',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Refferal',
+        to: '/referral',
+      },
+    ]
+  
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manege Price',
+    to: '/',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
   
   },
