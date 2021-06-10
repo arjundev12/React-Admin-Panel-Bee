@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch,Redirect } from 'react-router-dom';
+import { BrowserRouter,HashRouter, Route, Switch,Redirect } from 'react-router-dom';
 import './scss/style.scss';
 
 const loading = (
@@ -50,7 +50,7 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
           <React.Suspense fallback={loading}>
             <Switch>
             <UnauthenticatedRoute exact path="/login" name="Login Page" component={Login} />
@@ -60,7 +60,7 @@ class App extends Component {
             <AuthenticatedRoute path="/" name="Home" component={TheLayout} />
             </Switch>
           </React.Suspense>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
