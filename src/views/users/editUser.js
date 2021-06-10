@@ -17,10 +17,11 @@ const EditUser = () => {
         website: "",
         minner_Activity:"",
         is_email_verify: "",
-        is_number_verify: ""
+        is_number_verify: "",
+        is_complete_kyc: "",
     });
 
-    const { name, username, email, number, website,minner_Activity,is_email_verify,is_number_verify } = user;
+    const { name, username, email, number, website,minner_Activity,is_email_verify,is_number_verify ,is_complete_kyc} = user;
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
@@ -45,13 +46,19 @@ const EditUser = () => {
         if (user.number) {
             data.number = user.number
         }
+        if (user.is_number_verify) {
+            data.is_number_verify = user.is_number_verify
+        }
         if (user.minner_Activity) {
             data.minner_Activity = user.minner_Activity
+        }
+        if (user.is_complete_kyc) {
+            data.is_complete_kyc = user.is_complete_kyc
         }
         data._id = user._id 
         data.login_type = 'manual'
         console.log("daaaaaaa", data)
-        let response = await axios.post(`${CONSTANT.baseUrl}/api/user/update-profile`, data);
+        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data);
 
         if (response.data.code == 200) {
             toast("Update successfully");
@@ -164,6 +171,16 @@ const EditUser = () => {
                                                         onChange={e => onInputChange(e)}>
                                                         <option value={"1"}>Yes</option>
                                                         <option value={"0"}>No</option>
+                                                        <option value={"2"}>pending</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>is_complete_kyc</label>
+                                                    <select class="form-control" name="is_complete_kyc" value={is_complete_kyc}
+                                                        onChange={e => onInputChange(e)}>
+                                                        <option value={"1"}>Yes</option>
+                                                        <option value={"0"}>No</option>
+                                                        <option value={"2"}>pending</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-sm-6">

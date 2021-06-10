@@ -51,6 +51,10 @@ const Transactions = React.lazy(() => import('./views/Transactions/transactions'
 const Earning = React.lazy(() => import('./views/Transactions/earning'));
 const Mining = React.lazy(() => import('./views/Transactions/mining'));
 const Refferal = React.lazy(() => import('./views/Transactions/referral'));
+const ViewPrice = React.lazy(() => import('./views/ManagePrice/viewprice'));
+const Verification = React.lazy(() => import('./views/varification/verification'));
+const ViewDoc = React.lazy(() => import('./views/varification/viewDoc'));
+
 
 
 const routes = [
@@ -69,8 +73,9 @@ const routes = [
   { path: '/earning', name: 'Earning', component: Earning, exact: true },
   { path: '/mining', name: 'Mining', component: Mining , exact: true},
   { path: '/referral', name: 'Refferal', component: Refferal , exact: true},
-  // { path: '/base', name: 'Base', component: Cards, exact: true },
-  // { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
+  { path: '/price', name: 'price', component: ViewPrice, exact: true },
+  { path: '/verification', name: 'verification', component: Verification },
+  { path: '/doc/:id', exact: true, name: 'viewDoc', component: ViewDoc }
   // { path: '/base/cards', name: 'Cards', component: Cards },
   // { path: '/base/carousels', name: 'Carousel', component: Carousels },
   // { path: '/base/collapses', name: 'Collapse', component: Collapses },

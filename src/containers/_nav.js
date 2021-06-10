@@ -30,6 +30,7 @@ const _nav =  [
            
     // ]
   },
+  
   {
     _tag: 'CSidebarNavItem',
     name: 'News',
@@ -46,10 +47,15 @@ const _nav =  [
   },
    {
     _tag: 'CSidebarNavDropdown',
-    name: 'transactions',
-    to: '/transactions',
+    name: 'Transactions',
+    // to: '/transactions',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'All Transactions',
+        to: '/transactions',
+      },
       {
         _tag: 'CSidebarNavItem',
         name: 'Earning',
@@ -62,7 +68,7 @@ const _nav =  [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Refferal',
+        name: 'Referral',
         to: '/referral',
       },
     ]
@@ -71,9 +77,28 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Manege Price',
-    to: '/',
+    to: '/price',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
   
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Varifications',
+    to: '/verification',
+    icon: 'cil-puzzle',
+    // _children: [
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'kyc verification',
+    //     to: '/users',
+    //   },
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'Number Verification',
+    //     to: '/users',
+    //   },
+           
+    // ]
   },
   {
     _tag: 'CSidebarNavDropdown',
