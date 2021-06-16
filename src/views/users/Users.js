@@ -15,7 +15,7 @@ import Pagination from '../pagination/pagination'
 const Users = () => {
     const history = useHistory()
     //////////////////////////////////pagination/////////////////////////////////////
-    const [showPerPage, setShowPerPage] = useState(4);
+    const [showPerPage, setShowPerPage] = useState(10);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [index, setIndex] = useState(1);
@@ -37,13 +37,12 @@ const Users = () => {
     const [search, setSearch] = useState({});
     useEffect(() => {
         loadUser();
-
     }, [page, total, search]);
     const loadUser = async () => {
         let array = []
         const data = {
             page: page,
-            limit: 4
+            limit: 10
         }
         if (!(Object.keys(search).length === 0 && search.constructor === Object)) {
             data.searchData = search.text
@@ -161,12 +160,20 @@ const Users = () => {
                 </tbody>
             </Table>
             <ToastContainer />
-            <Pagination
+            {
+                total > 0? <Pagination
                 showPerPage={showPerPage}
                 onPaginationChange={onPaginationChange}
                 total={total}
                 page={page}
-            />
+            />:""
+            }
+            {/* <Pagination
+                showPerPage={showPerPage}
+                onPaginationChange={onPaginationChange}
+                total={total}
+                page={page}
+            /> */}
         </div>
     )
 }

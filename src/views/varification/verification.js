@@ -145,12 +145,14 @@ const Verification = () => {
                 </tbody>
             </Table>
             <ToastContainer />
-            <Pagination
+            {
+                total > 0? <Pagination
                 showPerPage={showPerPage}
                 onPaginationChange={onPaginationChange}
                 total={total}
                 page={page}
-            />
+            />:""
+            }
         </div>
     )
 }

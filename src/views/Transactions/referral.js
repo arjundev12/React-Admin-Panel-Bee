@@ -15,7 +15,7 @@ import '../../css/style.css'
 const ReferralTransactions = () => {
     const history = useHistory()
     //////////////////////////////////pagination/////////////////////////////////////
-    const [showPerPage, setShowPerPage] = useState(5);
+    const [showPerPage, setShowPerPage] = useState(10);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [index, setIndex] = useState(1);
@@ -39,7 +39,7 @@ const ReferralTransactions = () => {
     const loadData = async (page, filters = null) => {
         const data = {
             page: page,
-            limit: 5,
+            limit: 10,
             transaction_type: 'referral'
         }
 
@@ -151,12 +151,14 @@ const ReferralTransactions = () => {
                 </tbody>
             </Table>
             <ToastContainer />
-            <Pagination
+            {
+                total > 0? <Pagination
                 showPerPage={showPerPage}
                 onPaginationChange={onPaginationChange}
                 total={total}
                 page={page}
-            />
+            />:""
+            }
         </div>
     )
 }
