@@ -19,9 +19,13 @@ const EditUser = () => {
         is_email_verify: "",
         is_number_verify: "",
         is_complete_kyc: "",
+        country_code: ""
     });
+    const options = {
+        headers: {'token': localStorage.getItem('token')}
+      }; 
 
-    const { name, username, email, number, website,minner_Activity,is_email_verify,is_number_verify ,is_complete_kyc} = user;
+    const { name, username, email, number, website,minner_Activity,is_email_verify,is_number_verify ,is_complete_kyc, country_code} = user;
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
@@ -55,10 +59,13 @@ const EditUser = () => {
         if (user.is_complete_kyc) {
             data.is_complete_kyc = user.is_complete_kyc
         }
+        if (user.country_code) {
+            data.country_code = user.country_code
+        }
         data._id = user._id 
         data.login_type = 'manual'
         console.log("daaaaaaa", data)
-        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data);
+        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data,options);
 
         if (response.data.code == 200) {
             toast("Update successfully");
@@ -69,8 +76,9 @@ const EditUser = () => {
 
     const loadUser = async () => {
 
-        // const result = 
-        await axios.get(`${CONSTANT.baseUrl}/api/user/user-details?_id=${id}`).then((res) => {
+        // const result =
+      
+        await axios.get(`${CONSTANT.baseUrl}/api/admin/user-details?_id=${id}`,options).then((res) => {
             console.log("response", res.data)
             setUser(res.data.data);
         }).catch(err => {
@@ -143,8 +151,13 @@ const EditUser = () => {
                                                 </div>
                                                 
                                                 <div class="form-group col-sm-6">
-                                                    <label>mobile number</label>
+                                                    <label>Mobile Number</label>
                                                     <input type="text" name="number" class="form-control" placeholder="" value={number}
+                                                        onChange={e => onInputChange(e)} />
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>Country Code</label>
+                                                    <input type="text" name="country_code" class="form-control" placeholder="" value={country_code}
                                                         onChange={e => onInputChange(e)} />
                                                 </div>
                                                 {/* <div class="form-group col-sm-6">

@@ -29,9 +29,9 @@ const Blogs = () => {
         if (!(Object.keys(search).length === 0 && search.constructor === Object)) {
             data.searchData = search.text
         } 
-        console.log("datarequest ", data)
+        // console.log("datarequest ", data)
         const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-blogs`,data);
-        console.warn(res.data.data)
+        // console.warn(res.data.data)
         for (let item of res.data.data.docs) {
             if (item.title) {
                 array.push(item)

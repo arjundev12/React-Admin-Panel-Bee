@@ -34,10 +34,11 @@ const Login = (props) => {
     const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/login`, newEntry);
     console.warn(res.data)
     if (res.data.code == 200) {
-      toast("Get successfully");
+      // toast("Get successfully");
       localStorage.setItem('Auth', true);
-      setTimeout(function(){history.push('/'); }, 1000);
-      
+      localStorage.setItem('token', res.data.data.token);
+      setTimeout(function(){history.push('/'); }, 500);
+      setTimeout(function(){ localStorage.clear(); }, 1000 * 60 * 48);
     }
     console.warn(allEntry)
   }

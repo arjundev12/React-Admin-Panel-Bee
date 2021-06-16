@@ -27,7 +27,7 @@ const Users = () => {
     };
     const [user, setUser] = useState([{
         id: "",
-        email:"",
+        email: "",
         name: "",
         username: "",
         user_type: "",
@@ -48,11 +48,14 @@ const Users = () => {
         if (!(Object.keys(search).length === 0 && search.constructor === Object)) {
             data.searchData = search.text
         }
+        const options = {
+            headers: {'token': localStorage.getItem('token')}
+          };
         console.log("datarequest ", data)
-        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-user`, data);
+        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-user`, data, options);
         console.warn(res.data.data)
         if (res.data.code == 200) {
-            toast("List get successfully")
+            // toast("List get successfully")
             setUser(res.data.data.docs);
             await setTotal(res.data.data.total)
         }
@@ -64,9 +67,12 @@ const Users = () => {
         data.minner_Activity = e.target.value
         data._id = item._id
         data.login_type = item.login_type
-        await axios.post(`${CONSTANT.baseUrl}/api/user/update-profile`, data).then(data1 => {
-            console.log("response", data1)
-            toast(data1.data.data.message)
+        const options = {
+            headers: {'token': localStorage.getItem('token')}
+          };
+        await axios.post(`${CONSTANT.baseUrl}/api/admin/update-profile`, data,options ).then(data1 => {
+            // console.log("response", data1)
+            // toast(data1.data.data.message)
             loadUser()
         }).catch(err => {
             console.log("error", err)
@@ -78,21 +84,38 @@ const Users = () => {
         console.log("search text", e.target.name, e.target.value)
         setSearch({ ...search, [e.target.name]: e.target.value });
     }
+    const userBlock = async (e, id, type) => {
+        console.log("item data", id, type)
+        let data = {}
+        data._id = id
+        data.block_user = type
+        const options = {
+            headers: {'token': localStorage.getItem('token')}
+          };
+        await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data, options).then(data1 => {
+            // console.log("response", data1)
+            // toast(data1.data.data.message)
+            loadUser()
+        }).catch(err => {
+            console.log("error", err)
+            toast(err.data.message)
+        })
+    }
 
     return (
         <div>
             <Link className="btn btn-primary" to="/">
                 back to Home
-       </Link>
-            <div className= "searchBox">
-                    <input
-                        type="text"
-                        className="searchBox"
-                        placeholder="search here...."
-                        name="text"
-                        value={search.text}
-                        onChange={e => onInputChange1(e)}
-                    />
+            </Link>
+            <div className="searchBox">
+                <input
+                    type="text"
+                    className="searchBox"
+                    placeholder="search here...."
+                    name="text"
+                    value={search.text}
+                    onChange={e => onInputChange1(e)}
+                />
             </div>
 
             <Table striped bordered hover>
@@ -125,7 +148,12 @@ const Users = () => {
                                     {/* <option value="blocked">Block</option> */}
                                 </select></td>
                             <td><Link className="btn btn-primary mr-2 " to={`/user/${item._id}`}>view </Link>
-                                <Link className="btn btn-primary mr-2" to={`/user/edit/${item._id}`}> edit </Link>
+                                {item.block_user == '1' ? (
+                                    <Button className="btn btn-primary mr-2" onClick={e => userBlock(e, item._id, "0")}> Blocked </Button>
+                                ) : (
+                                    <Button className="btn btn-primary mr-2" onClick={e => userBlock(e, item._id, "1")}> Unblock </Button>
+                                )}
+                                {/* */}
                                 {/* <Link className="btn btn-primary " to="/"> delete</Link> */}
                             </td>
                         </tr>)

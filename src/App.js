@@ -22,7 +22,8 @@ const Users = React.lazy(() => import ('./views/users/Users'))
 const isAuthenticated = () => {
   //write your condition here
 
-  if (localStorage.getItem('Auth')) {
+  if (localStorage.getItem('Auth') && localStorage.getItem('token')) {
+    // setTimeout(function(){ localStorage.clear(); }, 5000);
     return true;
   }
   return false;

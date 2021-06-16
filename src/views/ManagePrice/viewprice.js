@@ -18,7 +18,9 @@ const ViewPrice = () => {
         reddit_reward:"",
         status: "",
     });
-
+    const options = {
+        headers: {'token': localStorage.getItem('token')}
+      };
     const { referral_ammount, earning_ammount, mining_rate, mining_ammount, number_reward,reddit_reward,status } = price;
     const onInputChange = e => {
         setPrice({ ...price, [e.target.name]: e.target.value });
@@ -35,14 +37,10 @@ const ViewPrice = () => {
         if (price.referral_ammount) {
             data.referral_ammount = price.referral_ammount
         }
-        if (price.earning_ammount) {
-            data.earning_ammount = price.earning_ammount
-        }
         if (price.mining_rate) {
             data.mining_rate = price.mining_rate
-        }
-        if (price.mining_ammount) {
-            data.mining_ammount = price.mining_ammount
+            data.mining_ammount = price.mining_rate * 24
+            data.earning_ammount = 0.1 * data.mining_ammount   // 10 percent of x amount
         }
         if (price.number_reward) {
             data.number_reward = price.number_reward
@@ -51,13 +49,13 @@ const ViewPrice = () => {
         if (price.reddit_reward) {
             data.reddit_reward = price.reddit_reward
         }
-        if (price.status) {
-            data.status = price.status
-        }
+        // if (price.status) {
+        //     data.status = price.status
+        // }
         data.id = price._id 
         // data.login_type = 'manual'
         console.log("request", data)
-        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-price`, data);
+        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-price`, data, options);
 
         if (response.data.code == 200) {
             toast("Update successfully");
@@ -71,8 +69,8 @@ const ViewPrice = () => {
     const loadData = async () => {
 
         // const result = 
-        await axios.get(`${CONSTANT.baseUrl}/api/admin/get-price`).then((res) => {
-            console.log("response", res.data)
+        await axios.get(`${CONSTANT.baseUrl}/api/admin/get-price`, options).then((res) => {
+            // console.log("response", res.data)
             setPrice(res.data.data[0]);
         }).catch(err => {
             console.warn(err)
@@ -95,45 +93,45 @@ const ViewPrice = () => {
                                         <form onSubmit={e => onSubmit(e)}>
                                             <div class="row">
                                                 <div class="form-group col-sm-6">
-                                                    <label>referral_ammount</label>
+                                                    <label>Referral Amount</label>
                                                     <input type="text" name="referral_ammount" class="form-control" placeholder="" value={referral_ammount}
                                                         onChange={e => onInputChange(e)} />
                                                 </div>
-                                                <div class="form-group col-sm-6">
+                                                {/* <div class="form-group col-sm-6">
                                                     <label>earning_ammount</label>
                                                     <input type="text" name="earning_ammount" class="form-control" placeholder="" value={earning_ammount}
                                                         onChange={e => onInputChange(e)} />
                                                 </div>
-                                                
+                                                 */}
                                                 <div class="form-group col-sm-6">
-                                                    <label>mining_rate</label>
+                                                    <label>Mining Rate /hour</label>
                                                     <input type="text" name="mining_rate" class="form-control" placeholder="" value={mining_rate}
                                                         onChange={e => onInputChange(e)} />
                                                 </div>
-                                                <div class="form-group col-sm-6">
+                                                {/* <div class="form-group col-sm-6">
                                                     <label>mining_ammount</label>
                                                     <input type="text" name="mining_ammount" class="form-control" placeholder="" value={mining_ammount}
                                                         onChange={e => onInputChange(e)} />
-                                                </div>
+                                                </div> */}
                                                 <div class="form-group col-sm-6">
-                                                    <label>number_reward</label>
+                                                    <label>Number Reward</label>
                                                     <input type="text" name="number_reward" class="form-control" placeholder="" value={number_reward}
                                                         onChange={e => onInputChange(e)} />
                                                 </div>
 
                                                <div class="form-group col-sm-6">
-                                                    <label>reddit_reward</label>
+                                                    <label>Reddit Reward</label>
                                                     <input type="text" name="reddit_reward" class="form-control" placeholder="" value={reddit_reward}
                                                         onChange={e => onInputChange(e)} />
                                                 </div>
-                                                <div class="form-group col-sm-6">
+                                                {/* <div class="form-group col-sm-6">
                                                     <label>status</label>
                                                     <select class="form-control" name="status" value={status}
                                                         onChange={e => onInputChange(e)}>
                                                         <option value={"active"}>active</option>
                                                         <option value={"inactive"}>inactive</option>
                                                     </select>
-                                                </div>
+                                                </div> */}
                                                
                                                 <div class="col-sm-12">
                                                     <button>Submit</button>

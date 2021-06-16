@@ -10,6 +10,9 @@ const Addblog = () => {
     content: "",
     image: ""
   });
+  const options = {
+    headers: {'token': localStorage.getItem('token')}
+  };
   const [image, setImage] = useState({});
 
   const { title, content } = blog;
@@ -29,7 +32,7 @@ const Addblog = () => {
   };
   const uploadImage = async e => {
 
-    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, image);
+    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, image, options);
     if (res.data.code == 200) {
       toast(res.data.message);
       console.warn(res.data.data)
@@ -41,7 +44,7 @@ const Addblog = () => {
   const onSubmit = async e => {
     e.preventDefault();
     console.warn("onsumbit", blog)
-    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/blogs`, blog);
+    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/blogs`, blog, options);
     toast(res.data.message);
     setTimeout(function(){history.push("/blogs"); }, 1000);
     

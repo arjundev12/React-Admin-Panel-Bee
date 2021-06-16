@@ -33,7 +33,7 @@ const News = () => {
         } 
         console.log("datarequest ", data)
         const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-news`, data);
-        console.warn("1111111111",res.data.data)
+        // console.warn("1111111111",res.data.data)
         for (let item of res.data.data.docs) {
             if (item.title) {
                 array.push(item)

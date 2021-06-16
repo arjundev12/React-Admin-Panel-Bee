@@ -76,7 +76,7 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Manege Price',
+    name: 'Manage Price',
     to: '/price',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
   

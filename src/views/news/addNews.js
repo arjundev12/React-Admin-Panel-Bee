@@ -10,6 +10,9 @@ const AddNews = () => {
     content: "",
     image: ""
   });
+  const options = {
+    headers: {'token': localStorage.getItem('token')}
+  };
   const [image, setImage] = useState({});
 
   const { title, content } = news;
@@ -30,7 +33,7 @@ const AddNews = () => {
   };
   const uploadImage = async e => {
     console.log("image", image)
-    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, image);
+    const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/upload-image`, image, options);
     console.log("res", res)
     if (res.data.code == 200) {
       toast(res.data.message);
@@ -43,7 +46,7 @@ const AddNews = () => {
   const onSubmit = async e => {
     e.preventDefault();
     console.warn("onsumbit", news)
-    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/news`, news);
+    const res =await axios.post(`${CONSTANT.baseUrl}/api/admin/news`, news, options);
     toast(res.data.message);
     setTimeout(function(){history.push("/news"); }, 1000);
     

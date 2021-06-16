@@ -19,7 +19,9 @@ const Verification = () => {
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [index, setIndex] = useState(1);
-
+    const options = {
+        headers: {'token': localStorage.getItem('token')}
+      }; 
     const onPaginationChange = (start, end) => {
         console.warn("getee, ", start, end)
         setPage(start)
@@ -50,10 +52,10 @@ const Verification = () => {
             data.searchData = search.text
         }
         console.log("datarequest ", data)
-        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-user`, data);
+        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-kyc-user`, data, options);
         console.warn(res.data.data)
         if (res.data.code == 200) {
-            toast("List get successfully")
+            // toast("List get successfully")
             setUser(res.data.data.docs);
             await setTotal(res.data.data.total)
         }
@@ -65,7 +67,7 @@ const Verification = () => {
         data.is_complete_kyc = e.target.value
         data._id = item._id
         data.login_type = item.login_type
-        await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data).then(data1 => {
+        await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data, options).then(data1 => {
             console.log("response", data1)
             toast(data1.data.data.message)
             loadUser()
@@ -123,15 +125,15 @@ const Verification = () => {
                                     onChange={e => onInputChange(e, item)}>
                                     <option value={'1'} >approved</option>
                                     <option value={'2'}>Panding</option>
-                                    <option value={'0'}>Not Upload</option>
+                                    {/* <option value={'0'}>Not Upload</option> */}
                                     {/* <option value="blocked">Block</option> */}
                                 </select></td>
 
                             <td> <div>
-                                {item.is_complete_kyc =='0' ? (
-                                    <Link className="btn btn-primary mr-2 " >not view </Link>
+                                {item.is_complete_kyc =='2' ? (
+                                    <Link className="btn btn-primary mr-2"  to={`/doc/${item._id}`}>verify </Link>
                                 ) : (
-                                    <Link className="btn btn-primary mr-2 " to={`/doc/${item._id}`}>view </Link>
+                                    <Link className="btn btn-primary mr-2 " to={`/doc/${item._id}`}>verified </Link>
                                 )}
                             </div>
                                 {/* <Link className="btn btn-primary mr-2 " to={`/doc/${item._id}`}>view </Link> */}

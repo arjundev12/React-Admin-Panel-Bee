@@ -21,7 +21,9 @@ const EarningTransactions = () => {
     const [index, setIndex] = useState(1);
     const [filters, setFilters] = useState({})
     const [totalAmount, setTotalAmount] = useState({})
-
+    const options = {
+        headers: {'token': localStorage.getItem('token')}
+      };
     const onPaginationChange = (start, end) => {
         console.warn("getee, ", start, end)
         setPage(start)
@@ -48,7 +50,7 @@ const EarningTransactions = () => {
             data.toId = search.text
         }   
         console.log("datadata", data)
-        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-transaction`, data);
+        const res = await axios.post(`${CONSTANT.baseUrl}/api/admin/get-transaction`, data,options);
         console.warn(res.data.data)
         if (res.data.code == 200) {
             toast("List get successfully")

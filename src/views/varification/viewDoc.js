@@ -16,14 +16,17 @@ const ViewDoc = ({ match }) => {
         isDocumentVerify: ""
     });
     const { id } = useParams();
+    const options = {
+        headers: {'token': localStorage.getItem('token')}
+      }; 
     useEffect(() => {
         // console.warn("params", match.params.id)
         getdata()
     }, []);
     const getdata = async () => {
 
-        const res = await axios.get(`${CONSTANT.baseUrl}/api/admin/get-kyc?id=${id}`);
-        const res1 = await axios.get(`${CONSTANT.baseUrl}/api/user/user-details?_id=${id}`)
+        const res = await axios.get(`${CONSTANT.baseUrl}/api/admin/get-kyc?id=${id}`,options);
+        const res1 = await axios.get(`${CONSTANT.baseUrl}/api/admin/user-details?_id=${id}`,options)
         console.warn("responseviewDoc", res.data)
         if (res.data.code != 200) {
             toast("Somethig went wrong");
@@ -47,7 +50,7 @@ const ViewDoc = ({ match }) => {
         }
         data._id = status._id
         console.log("daaaaaaa", data)
-        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data);
+        let response = await axios.put(`${CONSTANT.baseUrl}/api/admin/update-user`, data, options);
         // console.log("daaaaaaa", response)
         // history.push(`/user/${user.owner._id}`);
           // setTimeout(function () { history.push("/users"); }, 50000);
@@ -89,7 +92,7 @@ const ViewDoc = ({ match }) => {
                                                 // <li>{CONSTANT.img_url+'/'+item}</li>
                                                 <figure>
 
-                                                    {i + 1} <img width="670" height="300" src={CONSTANT.img_url + '/' + item} class="doc-img animate attachment-gallery-post-single wp-post-image" alt="doctor-2" />
+                                                    {i + 1} <img width="670" height="300" src={CONSTANT.img_url + item} class="doc-img animate attachment-gallery-post-single wp-post-image" alt="doctor-2" />
                                                 </figure>
                                             )
                                         }
