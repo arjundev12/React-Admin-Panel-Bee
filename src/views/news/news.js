@@ -63,9 +63,9 @@ const News = () => {
     }
     return (
         <div>
-            <Link className="btn btn-primary" to="/">
+            {/* <Link className="btn btn-primary" to="/">
                 back to Home
-       </Link>
+       </Link> */}
             <Link className="btn btn-primary" to="/add/news">
                 add News
        </Link>

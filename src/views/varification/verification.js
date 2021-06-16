@@ -84,9 +84,9 @@ const Verification = () => {
 
     return (
         <div>
-            <Link className="btn btn-primary" to="/">
+            {/* <Link className="btn btn-primary" to="/">
                 back to Home
-       </Link>
+       </Link> */}
             <div className="searchBox">
                 <input
                     type="text"

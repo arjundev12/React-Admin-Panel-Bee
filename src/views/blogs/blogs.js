@@ -62,9 +62,9 @@ const Blogs = () => {
     }
     return (
         <div>
-            <Link className="btn btn-primary" to="/">
+            {/* <Link className="btn btn-primary" to="/">
                 back to Home
-       </Link>
+       </Link> */}
             <Link className="btn btn-primary" to="/add/blogs">
                 add Blogs
        </Link>
