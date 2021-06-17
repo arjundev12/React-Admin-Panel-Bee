@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import *as  CONSTANT from '../../constant'
 import Pagination from '../pagination/pagination'
 
-
+import '../../css/style.css'
 
 
 
@@ -148,9 +148,9 @@ const Users = () => {
                                 </select></td>
                             <td><Link className="btn btn-primary mr-2 " to={`/user/${item._id}`}>view </Link>
                                 {item.block_user == '1' ? (
-                                    <Button className="btn btn-primary mr-2" onClick={e => userBlock(e, item._id, "0")}> Blocked </Button>
+                                    <Button className="btn btn-primary bg-red mr-2" onClick={e => userBlock(e, item._id, "0")}> Blocked </Button>
                                 ) : (
-                                    <Button className="btn btn-primary mr-2" onClick={e => userBlock(e, item._id, "1")}> Unblock </Button>
+                                    <Button className="btn btn-primary bg-green mr-2" onClick={e => userBlock(e, item._id, "1")}> Unblock </Button>
                                 )}
                                 {/* */}
                                 {/* <Link className="btn btn-primary " to="/"> delete</Link> */}

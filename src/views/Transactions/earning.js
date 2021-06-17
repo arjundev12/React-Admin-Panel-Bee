@@ -94,11 +94,9 @@ const EarningTransactions = () => {
     }
     return (
         <div>
-            <Link className="btn btn-primary" to="/">
-                back to Home
-       </Link>
+
       
-       <h3>Total Earning Amount: {totalAmount?totalAmount.totalAmount : "00" } Rs</h3>
+       <h3 className="heading-content">Total Earning Amount: {totalAmount?totalAmount.totalAmount : "00" } Rs</h3>
             <DropdownButton className='fltR' alignRight
                 title="filter"
                 id="dropdown-menu-align-right"

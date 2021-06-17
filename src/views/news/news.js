@@ -5,6 +5,7 @@ import { Button, Table } from 'react-bootstrap'
 import *as  CONSTANT from '../../constant'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../../css/style.css'
 
 const News = () => {
     const history = useHistory()
@@ -66,8 +67,8 @@ const News = () => {
             {/* <Link className="btn btn-primary" to="/">
                 back to Home
        </Link> */}
-            <Link className="btn btn-primary" to="/add/news">
-                add News
+            <Link className="btn btn-primary add-news" to="/add/news">
+                Add News
        </Link>
        <div>
                     <input

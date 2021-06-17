@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import *as  CONSTANT from '../../constant'
 import { ToastContainer, toast } from 'react-toastify';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const AddNews = () => {
   let history = useHistory();
   const [news, setNews] = useState({
@@ -18,6 +20,9 @@ const AddNews = () => {
   const { title, content } = news;
   const onInputChange = e => {
     setNews({ ...news, [e.target.name]: e.target.value });
+  };
+  const onInputChange2 = e => {
+    setNews({ ...news, content: e });
   };
   const onInputChange1 = async e => {
     console.log("onimputchenge",  e.target.files[0] )
@@ -67,19 +72,17 @@ const AddNews = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            {/* <input
               type="text"
               className="form-control form-control-lg"
               placeholder="Enter Your content"
               name="content"
               value={content}
               onChange={e => onInputChange(e)}
-            />
+            /> */}
+             <ReactQuill theme="snow" value={content} onChange={e => onInputChange2(e)}/>
           </div>
-          <div><input type="file" name="file" onChange={e => onInputChange1(e)} />
-            <button type="button" className="btn btn-primary" onClick={e => uploadImage(e)}>Upload</button>
 
-          </div>
           <button className="btn btn-primary btn-block">Add User</button>
         </form>
 

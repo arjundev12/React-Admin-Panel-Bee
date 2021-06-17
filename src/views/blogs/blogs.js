@@ -65,8 +65,8 @@ const Blogs = () => {
             {/* <Link className="btn btn-primary" to="/">
                 back to Home
        </Link> */}
-            <Link className="btn btn-primary" to="/add/blogs">
-                add Blogs
+            <Link className="btn btn-primary add-blog" to="/add/blogs">
+                Add Blogs
        </Link>
             <div>
                     <input

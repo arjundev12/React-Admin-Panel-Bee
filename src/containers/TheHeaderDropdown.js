@@ -40,7 +40,7 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Account</strong>
+        
         </CDropdownItem>
         {/* <CDropdownItem>
           <CIcon name="cil-bell" className="mfe-2" />
@@ -89,7 +89,7 @@ const TheHeaderDropdown = () => {
         </CDropdownItem>
         <CDropdownItem divider /> */}
         <CDropdownItem>
-        <Button  onClick ={e => clearLocalstorage(e)}>log out</Button>
+        <Button className="btn-logout"  onClick ={e => clearLocalstorage(e)}>log out</Button>
          {/* LOGOUT */}
         </CDropdownItem>
       </CDropdownMenu>

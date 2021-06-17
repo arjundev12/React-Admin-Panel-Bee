@@ -62,7 +62,101 @@ input[type="text"], input[type="password"], select, textarea, input[type="button
 }
 .searchBox{
 	max-width: 20%;
+	float: right !important;
 }
+.searchBox input[type="text"], input[type="password"], select, textarea, input[type="button"] {
+    padding: 3px 6px;
+    border: 1px solid #00000054;
+    margin-bottom: 10px;
+}
+a.btn.btn-primary.add-news {
+    float: right;
+    margin-bottom: 16px;
+    padding: 3px 4px;
+}
+a.btn.btn-primary.add-blog {
+    float: right;
+    margin-bottom: 16px;
+    padding: 3px 4px;
+}
+button#dropdown-menu-align-right {
+    padding: 3px 4px;
+    margin-bottom: 16px;
+    margin-top: -1px;
+}
+.d-flex.justify-content-center {
+    margin-bottom: 16px !important;
+}
+.text-center.dropdown-header.bg-light {
+    background: #fff !important;
+    display: none;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    text-decoration: none;
+    color: #455164;
+   /* justify-content: center;*/
+    background-color: #ddd !important;
+}
+a.btn.btn-primary.btn-back {
+    margin-bottom: 10px;
+}
+.c-header-nav .dropdown-item {
+  /*  min-width: 180px;*/
+    /* text-align: center; */
+    justify-content: center;
+}
+button.btn-logout.btn.btn-primary {
+    background: #ff000000;
+    border-color: #fff0 !important;
+    color: #000;
+    font-size: 15px;
+    /* width: 20px; */
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/**sun editor**/
+button.btn-logout.btn.btn-primary {
+    background: #ff000000;
+    border-color: #fff0 !important;
+    color: #000;
+    font-size: 15px;
+    /* width: 20px; */
+    text-transform: uppercase;
+    font-weight: 600;
+}
+/**sun editor**/
+/*.dropdown-menu{
+	background-color: #ddd;
+}*/
+.pt-0.dropdown-menu.show {
+    padding: 0;
+}
+.c-header-nav .dropdown-item {
+    min-width: 160px;
+}
+h3.heading-content {
+    float: left;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+input.searchBox {
+    padding: 3px 6px;
+    border: 1px solid #00000054;
+    margin-bottom: 10px;
+    margin-right: 6px;
+}
+button.btn.btn-primary.bg-red.mr-2.btn.btn-primary {
+    background: red;
+    border-color: red;
+}
+button.btn.btn-primary.bg-green.mr-2.btn.btn-primary {
+    background: green;
+    border-color: green;
+}
+/*.searchBox {
+    float: right;
+}*/
 table {
 	width: 100%;
 }
