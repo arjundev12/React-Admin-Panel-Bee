@@ -3,6 +3,9 @@ import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import *as  CONSTANT from '../../constant'
 import { ToastContainer, toast } from 'react-toastify';
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const Addblog = () => {
   let history = useHistory();
   const [blog, setBlog] = useState({
@@ -18,6 +21,9 @@ const Addblog = () => {
   const { title, content } = blog;
   const onInputChange = e => {
     setBlog({ ...blog, [e.target.name]: e.target.value });
+  };
+  const onInputChange2 = e => {
+    setBlog({ ...blog, content: e });
   };
   const onInputChange1 = async e => {
     // setImage({ image: e.target.files[0] });
@@ -65,14 +71,15 @@ const Addblog = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            {/* <input
               type="text"
               className="form-control form-control-lg"
               placeholder="Enter Your content"
               name="content"
               value={content}
               onChange={e => onInputChange(e)}
-            />
+            /> */}
+              <ReactQuill theme="snow" value={content} onChange={e => onInputChange2(e)}/>
           </div>
           <div><input type="file" name="file" onChange={e => onInputChange1(e)} />
             <button type="button" className="btn btn-primary" onClick={e => uploadImage(e)}>Upload</button>
